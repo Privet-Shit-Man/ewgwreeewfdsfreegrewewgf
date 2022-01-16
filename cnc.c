@@ -414,9 +414,9 @@ void *telnetWorker(void *sock) {
 		char banner7 [5000];
 		char banner8 [5000];
 		char banner9 [80];
-        	sprintf(banner1, "                \e[38;2;89;255;0m╦═╗╔═╗╦ \e[38;2;0;229;255m ╔═╗╔═╗╔╦╗\r\n");
-		sprintf(banner2, "                \e[38;2;89;255;0m╠╦╝║╣ ║ \e[38;2;0;229;255m ║ ║╠═╣ ║║\r\n");
-		sprintf(banner3, "                \e[38;2;89;255;0m╩╚═╚═╝╩═╝\e[38;2;0;229;255m╚═╝╩ ╩═╩╝\r\n");
+        	sprintf(banner1, "                          \e[38;2;89;255;0m╦═╗╔═╗╦ \e[38;2;0;229;255m ╔═╗╔═╗╔╦╗\r\n");
+		sprintf(banner2, "                          \e[38;2;89;255;0m╠╦╝║╣ ║ \e[38;2;0;229;255m ║ ║╠═╣ ║║\r\n");
+		sprintf(banner3, "                          \e[38;2;89;255;0m╩╚═╚═╝╩═╝\e[38;2;0;229;255m╚═╝╩ ╩═╩╝\r\n");
                 sprintf(banner4, "                        \e[38;2;89;255;0mType '\e[38;2;0;229;255mHELP\e[38;2;89;255;0m' to see all commands\r\n");
                 sprintf(banner9, "\r\n");
         if (send(thefd, "\033[1A\033[2J\033[1;1H", 14, MSG_NOSIGNAL) == -1) goto end;
@@ -464,6 +464,41 @@ if (strncmp(buf, "METHODS", 7) == 0 || strncmp(buf, "methods", 7) == 0 || strncm
 				if(send(thefd, ddosline5,  strlen(ddosline4),	MSG_NOSIGNAL) == -1) goto end;
 				if(send(thefd, ddosline6,  strlen(ddosline4),	MSG_NOSIGNAL) == -1) goto end;
 				if(send(thefd, ddosline12,  strlen(ddosline12),	MSG_NOSIGNAL) == -1) goto end;
+				pthread_create(&title, NULL, &titleWriter, sock);
+				while(1) {
+				if(send(thefd, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m~\e[38;2;89;255;0m ", 102, MSG_NOSIGNAL) == -1) goto end;
+				break;
+				}
+				continue;
+			}
+if (strncmp(buf, "help", 4) == 0 || strncmp(buf, "HELP", 4) == 0 || strncmp(buf, "hELP", 4) == 0 || strncmp(buf, "Help", 4) == 0) {
+				pthread_create(&title, NULL, &titleWriter, sock);
+				char help1  [800];
+				char help2  [800];
+				char help3  [800];
+				char help4  [800];
+				char help5  [800];
+				char help6  [800];
+				char help7  [800];
+				char help8  [800];
+
+        		sprintf(help1, "╔═══════════════════════════════════════╗\r\n");
+        		sprintf(help2, "║ ATTACK - Shows Attack Commands.       ║\r\n");
+        		sprintf(help3, "║ STATS - Shows Server Stats.           ║\r\n");
+        		sprintf(help4, "║ RULES - Shows Rules.                  ║\r\n");
+        		sprintf(help5, "║ INFO - Shows Info.                    ║\r\n");
+        		sprintf(help6, "║ CLEAR - Clears Screen Back To Banner. ║\r\n");
+        		sprintf(help7, "║ EXIT - Exits Out Of Server.           ║\r\n");
+        		sprintf(help8, "╚═══════════════════════════════════════╝\r\n");
+
+				if(send(thefd, help1,  strlen(help1), MSG_NOSIGNAL) == -1) goto end;
+				if(send(thefd, help2,  strlen(help2), MSG_NOSIGNAL) == -1) goto end;
+				if(send(thefd, help3,  strlen(help3), MSG_NOSIGNAL) == -1) goto end;
+				if(send(thefd, help4,  strlen(help4), MSG_NOSIGNAL) == -1) goto end;
+				if(send(thefd, help5,  strlen(help5), MSG_NOSIGNAL) == -1) goto end;
+				if(send(thefd, help6,  strlen(help6), MSG_NOSIGNAL) == -1) goto end;
+				if(send(thefd, help7,  strlen(help7), MSG_NOSIGNAL) == -1) goto end;
+				if(send(thefd, help8,  strlen(help8), MSG_NOSIGNAL) == -1) goto end;
 				pthread_create(&title, NULL, &titleWriter, sock);
 				while(1) {
 				if(send(thefd, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m~\e[38;2;89;255;0m ", 102, MSG_NOSIGNAL) == -1) goto end;

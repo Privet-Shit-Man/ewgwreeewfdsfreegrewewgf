@@ -149,7 +149,7 @@ void broadcast(char *msg, int us, char *sender)
                         send(i, ": ", 2, MSG_NOSIGNAL); 
                 }
                 send(i, msg, strlen(msg), MSG_NOSIGNAL);
-                if(sendMGM && managements[i].connected) send(i, "\r\n\e[0;37m[Slam\e[0;37m@Reload\e[0;37m]#\e[0;37m", 45, MSG_NOSIGNAL);
+                if(sendMGM && managements[i].connected) send(i, "\r\n\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m#\e[38;2;89;255;0m", 45, MSG_NOSIGNAL);
                 else send(i, "\n", 1, MSG_NOSIGNAL);
         }
         free(wot);
@@ -380,7 +380,7 @@ void *telnetWorker(void *sock) {
         }
         sprintf(botnet, "\x1b[45mWelcome User\r\n");
         if(send(thefd, botnet, strlen(botnet), MSG_NOSIGNAL) == -1) goto end;  
-		sprintf(botnet, "\033[34;1mUsername\033[33;3m: ");
+		sprintf(botnet, "Username\033[33;3m: ");
         if(send(thefd, botnet, strlen(botnet), MSG_NOSIGNAL) == -1) goto end;
         if(fdgets(buf, sizeof buf, thefd) < 1) goto end;
         trim(buf);
@@ -389,7 +389,7 @@ void *telnetWorker(void *sock) {
         find_line = Search_in_File(nickstring);
 
         if(strcmp(nickstring, accounts[find_line].id) == 0){                  
-        sprintf(botnet, "\033[34;1mPassword\033[33;3m: \e[0;30m"); 
+        sprintf(botnet, "Password\033[33;3m: \e[0;30m"); 
         if(send(thefd, botnet, strlen(botnet), MSG_NOSIGNAL) == -1) goto end;
         if(fdgets(buf, sizeof buf, thefd) < 1) goto end;
         trim(buf);
@@ -405,31 +405,24 @@ void *telnetWorker(void *sock) {
         pthread_create(&title, NULL, &titleWriter, sock);
         if (send(thefd, "\033[1A\033[2J\033[1;1H", 14, MSG_NOSIGNAL) == -1) goto end;
         if(send(thefd, "\r\n", 2, MSG_NOSIGNAL) == -1) goto end;
-	        char ascii_banner_line1 [5000];
-		char ascii_banner_line2 [5000];
-		char ascii_banner_line3 [5000];
-		char ascii_banner_line4 [5000];
-		char ascii_banner_line5 [5000];
-		char ascii_banner_line6 [5000];
-		char ascii_banner_line7 [5000];
-		char ascii_banner_line8 [5000];
-		char ascii_banner_line9[80];
-        	sprintf(ascii_banner_line1, "                ╦═╗╔═╗╦  ╔═╗╔═╗╔╦╗\r\n");
-		sprintf(ascii_banner_line2, "                ╠╦╝║╣ ║  ║ ║╠═╣ ║║\r\n");
-		sprintf(ascii_banner_line3, "                ╩╚═╚═╝╩═╝╚═╝╩ ╩═╩╝\r\n");
-		sprintf(ascii_banner_line9, "\r\n");
+	        char banner1 [5000];
+		char banner2 [5000];
+		char banner3 [5000];
+		char banner4 [5000];
+		char banner5 [5000];
+		char banner6 [5000];
+		char banner7 [5000];
+		char banner8 [5000];
+		char banner9 [80];
+        	sprintf(banner1, "                \e[38;2;89;255;0m╦═╗╔═╗╦ \e[38;2;0;229;255m ╔═╗╔═╗╔╦╗\r\n");
+		sprintf(banner2, "                \e[38;2;89;255;0m╠╦╝║╣ ║ \e[38;2;0;229;255m ║ ║╠═╣ ║║\r\n");
+		sprintf(banner3, "                \e[38;2;89;255;0m╩╚═╚═╝╩═╝\e[38;2;0;229;255m╚═╝╩ ╩═╩╝\r\n");
         if (send(thefd, "\033[1A\033[2J\033[1;1H", 14, MSG_NOSIGNAL) == -1) goto end;
-		if(send(thefd, ascii_banner_line1, strlen(ascii_banner_line1), MSG_NOSIGNAL) == -1) goto end;
-        	if(send(thefd, ascii_banner_line2, strlen(ascii_banner_line2), MSG_NOSIGNAL) == -1) goto end;
-		if(send(thefd, ascii_banner_line3, strlen(ascii_banner_line3), MSG_NOSIGNAL) == -1) goto end;
-		if(send(thefd, ascii_banner_line4, strlen(ascii_banner_line4), MSG_NOSIGNAL) == -1) goto end;
-		if(send(thefd, ascii_banner_line5, strlen(ascii_banner_line5), MSG_NOSIGNAL) == -1) goto end;
-		if(send(thefd, ascii_banner_line6, strlen(ascii_banner_line6), MSG_NOSIGNAL) == -1) goto end;
-		if(send(thefd, ascii_banner_line7, strlen(ascii_banner_line7), MSG_NOSIGNAL) == -1) goto end;
-		if(send(thefd, ascii_banner_line8, strlen(ascii_banner_line8), MSG_NOSIGNAL) == -1) goto end;
-		if(send(thefd, ascii_banner_line9, strlen(ascii_banner_line9), MSG_NOSIGNAL) == -1) goto end;
+		if(send(thefd, banner1, strlen(banner1), MSG_NOSIGNAL) == -1) goto end;
+        	if(send(thefd, banner2, strlen(banner2), MSG_NOSIGNAL) == -1) goto end;
+		if(send(thefd, banner3, strlen(banner3), MSG_NOSIGNAL) == -1) goto end;
 		while(1) {
-		if(send(thefd, "\r\n\e[0;37m[Slam\e[0;37m@Reload\e[0;37m]#\e[0;37m", 45, MSG_NOSIGNAL) == -1) goto end;
+		if(send(thefd, "\r\n\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m#\e[38;2;89;255;0m", 45, MSG_NOSIGNAL) == -1) goto end;
 		break;
 		}
         pthread_create(&title, NULL, &titleWriter, sock);
@@ -469,7 +462,7 @@ if(strstr(buf, "ATTACK")) {
 				if(send(thefd, ddosline12,  strlen(ddosline12),	MSG_NOSIGNAL) == -1) goto end;
 				pthread_create(&title, NULL, &titleWriter, sock);
 				while(1) {
-				if(send(thefd, "\r\n\e[0;37m[Slam\e[0;37m@Reload\e[0;37m]#\e[0;37m", 44, MSG_NOSIGNAL) == -1) goto end;
+				if(send(thefd, "\r\n\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m#\e[38;2;89;255;0m", 44, MSG_NOSIGNAL) == -1) goto end;
 				break;
 				}
 				continue;
@@ -540,27 +533,20 @@ if(strstr(buf, "ATTACK")) {
         if (strstr(buf, "CLEAR"))
         { 
           if(send(thefd, "\033[1A\033[2J\033[1;1H\r\n", 16, MSG_NOSIGNAL) == -1) goto end;
-        	sprintf(ascii_banner_line1, "                ╦═╗╔═╗╦  ╔═╗╔═╗╔╦╗\r\n");
-		sprintf(ascii_banner_line2, "                ╠╦╝║╣ ║  ║ ║╠═╣ ║║\r\n");
-		sprintf(ascii_banner_line3, "                ╩╚═╚═╝╩═╝╚═╝╩ ╩═╩╝\r\n");
-		sprintf(ascii_banner_line9, "\r\n");
+        	sprintf(banner1, "                \e[38;2;89;255;0m╦═╗╔═╗╦ \e[38;2;0;229;255m ╔═╗╔═╗╔╦╗\r\n");
+		sprintf(banner2, "                \e[38;2;89;255;0m╠╦╝║╣ ║ \e[38;2;0;229;255m ║ ║╠═╣ ║║\r\n");
+		sprintf(banner3, "                \e[38;2;89;255;0m╩╚═╚═╝╩═╝\e[38;2;0;229;255m╚═╝╩ ╩═╩╝\r\n");
         if (send(thefd, "\033[1A\033[2J\033[1;1H", 14, MSG_NOSIGNAL) == -1) goto end;
-		if(send(thefd, ascii_banner_line1, strlen(ascii_banner_line1), MSG_NOSIGNAL) == -1) goto end;
-        	if(send(thefd, ascii_banner_line2, strlen(ascii_banner_line2), MSG_NOSIGNAL) == -1) goto end;
-		if(send(thefd, ascii_banner_line3, strlen(ascii_banner_line3), MSG_NOSIGNAL) == -1) goto end;
-		if(send(thefd, ascii_banner_line4, strlen(ascii_banner_line4), MSG_NOSIGNAL) == -1) goto end;
-		if(send(thefd, ascii_banner_line5, strlen(ascii_banner_line5), MSG_NOSIGNAL) == -1) goto end;
-		if(send(thefd, ascii_banner_line6, strlen(ascii_banner_line6), MSG_NOSIGNAL) == -1) goto end;
-		if(send(thefd, ascii_banner_line7, strlen(ascii_banner_line7), MSG_NOSIGNAL) == -1) goto end;
-		if(send(thefd, ascii_banner_line8, strlen(ascii_banner_line8), MSG_NOSIGNAL) == -1) goto end;
-		if(send(thefd, ascii_banner_line9, strlen(ascii_banner_line9), MSG_NOSIGNAL) == -1) goto end;
+		if(send(thefd, banner1, strlen(banner1), MSG_NOSIGNAL) == -1) goto end;
+        	if(send(thefd, banner2, strlen(banner2), MSG_NOSIGNAL) == -1) goto end;
+		if(send(thefd, banner3, strlen(banner3), MSG_NOSIGNAL) == -1) goto end;
          }
          if (strstr(buf, "EXIT")) 
          {
             goto end;
          }
                 trim(buf);
-                sprintf(botnet, "\r\n\e[0;37m[Slam\e[0;37m@Reload\e[0;37m]#\e[0;37m");
+                sprintf(botnet, "\r\n\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m#\e[38;2;89;255;0m");
                 if(send(thefd, botnet, strlen(botnet), MSG_NOSIGNAL) == -1) goto end;
                 if(strlen(buf) == 0) continue;
                 printf("%s: \"%s\"\n",accounts[find_line].id, buf);

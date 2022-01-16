@@ -990,7 +990,7 @@ void processCmd(int argc, unsigned char *argv[]) {
                 {
                     if(!listFork())
                     {
-                        SendSTD(ip, port, time, std_packet);
+                        SendSTDHEX(ip, port, time, std_packet);
                         SendTCP(ip, port, time, spoofed, flags, packetsize, pollinterval);
                         close(mainCommSock);
                         _exit(0);
@@ -999,7 +999,7 @@ void processCmd(int argc, unsigned char *argv[]) {
                 }
             } else {
                 if (listFork()) { return; }
-                SendSTD(ip, port, time, std_packet);
+                SendSTDHEX(ip, port, time, std_packet);
                 SendTCP(ip, port, time, spoofed, flags, packetsize, pollinterval);
                 close(mainCommSock);
                 _exit(0);

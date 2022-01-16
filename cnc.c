@@ -380,7 +380,7 @@ void *telnetWorker(void *sock) {
         }
         sprintf(botnet, "\x1b[45mWelcome User\r\n");
         if(send(thefd, botnet, strlen(botnet), MSG_NOSIGNAL) == -1) goto end;  
-		sprintf(botnet, "Username\033[33;3m: ");
+		sprintf(botnet, "Username: ");
         if(send(thefd, botnet, strlen(botnet), MSG_NOSIGNAL) == -1) goto end;
         if(fdgets(buf, sizeof buf, thefd) < 1) goto end;
         trim(buf);
@@ -389,7 +389,7 @@ void *telnetWorker(void *sock) {
         find_line = Search_in_File(nickstring);
 
         if(strcmp(nickstring, accounts[find_line].id) == 0){                  
-        sprintf(botnet, "Password\033[33;3m: \e[0;30m"); 
+        sprintf(botnet, "Password: "); 
         if(send(thefd, botnet, strlen(botnet), MSG_NOSIGNAL) == -1) goto end;
         if(fdgets(buf, sizeof buf, thefd) < 1) goto end;
         trim(buf);
@@ -466,7 +466,7 @@ if (strncmp(buf, "METHODS", 7) == 0 || strncmp(buf, "methods", 7) == 0 || strncm
 				if(send(thefd, ddosline12,  strlen(ddosline12),	MSG_NOSIGNAL) == -1) goto end;
 				pthread_create(&title, NULL, &titleWriter, sock);
 				while(1) {
-				if(send(thefd, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m#\e[38;2;89;255;0m", 44, MSG_NOSIGNAL) == -1) goto end;
+				if(send(thefd, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m#\e[38;2;89;255;0m", 99, MSG_NOSIGNAL) == -1) goto end;
 				break;
 				}
 				continue;

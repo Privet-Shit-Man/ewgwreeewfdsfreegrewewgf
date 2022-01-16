@@ -523,7 +523,7 @@ if (strncmp(buf, "info", 4) == 0 || strncmp(buf, "INFO", 4) == 0 || strncmp(buf,
 				char info8  [800];
 
         		sprintf(info1, "             \e[38;2;0;229;255m╔═══════════════════════════════════════════╗\r\n");
-        		sprintf(info2, "             \e[38;2;0;229;255m║ \e[38;2;89;255;0mThis botnet is made by ONLY by Reload#9575\e[38;2;0;229;255m║\r\n");
+        		sprintf(info2, "             \e[38;2;0;229;255m║ \e[38;2;89;255;0mThis botnet is made ONLY by Reload#9575   \e[38;2;0;229;255m║\r\n");
         		sprintf(info4, "             \e[38;2;0;229;255m║ \e[38;2;89;255;0mIf you get this src ur a nigger           \e[38;2;0;229;255m║\r\n");
         		sprintf(info5, "             \e[38;2;0;229;255m║ \e[38;2;89;255;0mIf if your not black have fun!            \e[38;2;0;229;255m║\r\n");
         		sprintf(info6, "             \e[38;2;0;229;255m║ \e[38;2;89;255;0mNo Hitting Over 12000 BTW                 \e[38;2;0;229;255m║\r\n");

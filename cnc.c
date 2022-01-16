@@ -444,6 +444,7 @@ if (strncmp(buf, "METHODS", 7) == 0 || strncmp(buf, "methods", 7) == 0 || strncm
 				char methods4  [800];
 				char methods5  [800];
 				char methods6  [800];
+				char methods7  [800];
 				char methods8  [800];
                                 char methods9  [800];
                                 char methods10  [800];

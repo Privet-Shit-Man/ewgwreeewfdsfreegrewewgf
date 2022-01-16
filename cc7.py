@@ -10,26 +10,26 @@ else:
     
 bot = sys.argv[1]
 
-yourafag = raw_input("Get arch's? Y/n:")
+yourafag = ("y")
 if yourafag.lower() == "y":
     get_arch = True
 else:
     get_arch = False
 
-compileas = ["Okami.mips", #mips
-             "Okami.mpsl", #mipsel
-             "Okami.sh4", #sh4
-             "Okami.x86", #x86
-             "Okami.arm6", #Armv6l
-             "Okami.i686", #i686
-             "Okami.ppc", #ppc
-             "Okami.i586", #i586
-             "Okami.m68k", #m68k
-             "Okami.sparc", #sparc
-			 "Okami.arm4", #arm4
-			 "Okami.arm5", #arm5
-			 "Okami.arm7", #arm7
-			 "Okami.ppc"] #ppc
+compileas = ["Reload.mips", #mips
+             "Reload.mpsl", #mipsel
+             "Reload.sh4", #sh4
+             "Reload.x86", #x86
+             "Reload.arm6", #Armv6l
+             "Reload.i686", #i686
+             "Reload.ppc", #ppc
+             "Reload.i586", #i586
+             "Reload.m68k", #m68k
+             "Reload.sparc", #sparc
+			 "Reload.arm4", #arm4
+			 "Reload.arm5", #arm5
+			 "Reload.arm7", #arm7
+			 "Reload.ppc"] #ppc
 
 getarch = ['http://uclibc.org/downloads/binaries/0.9.30.1/cross-compiler-mips.tar.bz2',
 'http://uclibc.org/downloads/binaries/0.9.30.1/cross-compiler-mipsel.tar.bz2',

